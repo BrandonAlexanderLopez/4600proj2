@@ -1,3 +1,7 @@
+
+#TO BUILD THE APPLICATION RUN 'go build .' TO BUILD THE WHOLE PROJECT 2 EFFECTIVELY
+#THEN RUN './Project2'
+
 # Project 2: Shell Builtins
 
 ## Description
