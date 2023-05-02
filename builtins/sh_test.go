@@ -2,14 +2,13 @@ package builtins_test
 
 import (
 	"errors"
-	"os"
 	"os/exec"
 	"testing"
 
-	"github.com/jh125486/CSCE4600/Project2/builtins"
+	"github.com/BrandonAlexanderLopez/4600proj2/builtins"
 )
 
-func TestBash(t *testing.T) {
+func TestSH(t *testing.T) {
 	tests := []struct {
 		name    string
 		command string
@@ -31,8 +30,8 @@ func TestBash(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := builtins.Bash(os.Stdout, tt.command); !errors.Is(err, tt.wantErr) {
-				t.Errorf("Bash() error = %v, wantErr %v", err, tt.wantErr)
+			if err := builtins.SH(tt.command); !errors.Is(err, tt.wantErr) {
+				t.Errorf("SH() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

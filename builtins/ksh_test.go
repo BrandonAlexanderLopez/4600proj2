@@ -5,10 +5,10 @@ import (
 	"os/exec"
 	"testing"
 
-	"github.com/jh125486/CSCE4600/Project2/builtins"
+	"github.com/BrandonAlexanderLopez/4600proj2/builtins"
 )
 
-func TestSH(t *testing.T) {
+func TestKsh(t *testing.T) {
 	tests := []struct {
 		name    string
 		command string
@@ -30,8 +30,8 @@ func TestSH(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := builtins.SH(tt.command); !errors.Is(err, tt.wantErr) {
-				t.Errorf("SH() error = %v, wantErr %v", err, tt.wantErr)
+			if err := builtins.Ksh(tt.command); !errors.Is(err, tt.wantErr) {
+				t.Errorf("Ksh() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}
