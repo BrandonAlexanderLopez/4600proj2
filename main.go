@@ -64,6 +64,8 @@ func printPrompt(w io.Writer) error {
 }
 
 func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
+	var n int
+
 	// Remove trailing spaces.
 	input = strings.TrimSpace(input)
 
@@ -82,6 +84,8 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 		return builtins.PresentWorkingDirectory(w, args...)
 	case "unsetenv":
 		return builtins.UnsetEnv(args...)
+	case "shift":
+		return builtins.LeftShift(n, args...)
 	case "exit":
 		exit <- struct{}{}
 		return nil
