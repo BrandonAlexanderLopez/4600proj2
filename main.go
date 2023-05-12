@@ -65,6 +65,20 @@ func printPrompt(w io.Writer) error {
 
 func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 	var n int
+	
+	f, err := os.OpenFile("history.txt", os.O_APPEND|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println(err)
+	}
+	_, err = fmt.Fprintln(f, input)
+	if err != nil {
+		fmt.Println(err)
+		f.Close()
+	}
+	err = f.Close()
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	// Remove trailing spaces.
 	input = strings.TrimSpace(input)
@@ -86,6 +100,8 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 		return builtins.UnsetEnv(args...)
 	case "shift":
 		return builtins.LeftShift(n, args...)
+	case "history":
+		return builtins.History(w, args...)
 	case "exit":
 		exit <- struct{}{}
 		return nil
